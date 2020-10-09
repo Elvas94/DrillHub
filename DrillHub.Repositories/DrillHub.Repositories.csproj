@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DrillHub.DataAccess\DrillHub.DataAccess.csproj" />
+    <ProjectReference Include="..\DrillHub.Infrastructure\DrillHub.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
