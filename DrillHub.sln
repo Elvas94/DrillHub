@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrillHub.WebApi", "DrillHub.WebApi\DrillHub.WebApi.csproj", "{53BB6EF3-0E4D-41BC-A688-51352B9486CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrillHub.DataAccess", "DrillHub.DataAccess\DrillHub.DataAccess.csproj", "{CD544578-AA48-4D0D-84EA-F3255D1A1C6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrillHub.Infrastructure", "DrillHub.Infrastructure\DrillHub.Infrastructure.csproj", "{05E3B956-A51A-4CF0-B55F-80C0203C7C8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrillHub.Model", "DrillHub.Model\DrillHub.Model.csproj", "{F620AB0D-55F9-47CA-BC62-469AE02CF93E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrillHub.Repositories", "DrillHub.Repositories\DrillHub.Repositories.csproj", "{61DF40D6-F928-4D7C-905C-3D3664387AAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53BB6EF3-0E4D-41BC-A688-51352B9486CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BB6EF3-0E4D-41BC-A688-51352B9486CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BB6EF3-0E4D-41BC-A688-51352B9486CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BB6EF3-0E4D-41BC-A688-51352B9486CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD544578-AA48-4D0D-84EA-F3255D1A1C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD544578-AA48-4D0D-84EA-F3255D1A1C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD544578-AA48-4D0D-84EA-F3255D1A1C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD544578-AA48-4D0D-84EA-F3255D1A1C6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E3B956-A51A-4CF0-B55F-80C0203C7C8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E3B956-A51A-4CF0-B55F-80C0203C7C8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E3B956-A51A-4CF0-B55F-80C0203C7C8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E3B956-A51A-4CF0-B55F-80C0203C7C8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F620AB0D-55F9-47CA-BC62-469AE02CF93E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F620AB0D-55F9-47CA-BC62-469AE02CF93E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F620AB0D-55F9-47CA-BC62-469AE02CF93E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F620AB0D-55F9-47CA-BC62-469AE02CF93E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61DF40D6-F928-4D7C-905C-3D3664387AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61DF40D6-F928-4D7C-905C-3D3664387AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61DF40D6-F928-4D7C-905C-3D3664387AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61DF40D6-F928-4D7C-905C-3D3664387AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6294F3A6-7FE9-4B7D-9BDC-7B94BC7F276E}
+	EndGlobalSection
+EndGlobal
