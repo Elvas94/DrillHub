@@ -1,0 +1,36 @@
+﻿root = true
+
+[**.*]
+charset=utf-8-bom
+tab_size = 4
+indent_size = 4
+end_of_line = crlf
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{csproj,config,json,scss,resx,pubxml}]
+tab_size = 2
+indent_size = 2
+
+[**.min.*]
+indent_style = ignore
+insert_final_newline = ignore
+trim_trailing_whitespace = false
+
+[package.json]
+end_of_line = lf
+
+[package-lock.json]
+indent_style = ignore
+insert_final_newline = ignore
+trim_trailing_whitespace = false
+
+[**.resx]
+insert_final_newline = ignore
+
+[**.json]
+charset=utf-8
+
+[**.tst]
+insert_final_newline = ignore
