@@ -8,6 +8,7 @@ namespace DrillHub.Model
         {
             services.AddTransient<Products.ProductService>();
             services.AddTransient<Orders.OrderService>();
+            services.AddTransient<ExcelService>();
         }
     }
 }
