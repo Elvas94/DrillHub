@@ -14,5 +14,6 @@ namespace DrillHub.Model.Products
         public string VendorCode { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public IList<ProductOrder> Orders { get; set; }
+        public UnitType UnitType { get; set; }
     }
 }
