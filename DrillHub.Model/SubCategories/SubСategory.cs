@@ -2,9 +2,9 @@
 using DrillHub.Infrastructure;
 using DrillHub.Model.Products;
 
-namespace DrillHub.Model.Subcategories
+namespace DrillHub.Model.SubCategories
 {
-    public class Subcategory : IAggregateRoot<int>
+    public class SubCategory : IAggregateRoot<int>
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }

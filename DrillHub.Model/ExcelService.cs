@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using DrillHub.ConsoleRunner;
 using DrillHub.Model.Categories;
 using DrillHub.Model.Products;
-using DrillHub.Model.Subcategories;
 using Spire.Xls;
+using DrillHub.Model.SubCategories;
 
 namespace DrillHub.Model
 {
