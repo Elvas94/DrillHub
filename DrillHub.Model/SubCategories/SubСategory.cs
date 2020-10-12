@@ -9,7 +9,7 @@ namespace DrillHub.Model.SubCategories
         public int Id { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; }
-        public IList<Product> Products { get; set; }
         public bool IsCategory { get; set; }
+        public virtual IList<Product> Products { get; set; }
     }
 }
