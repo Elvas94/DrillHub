@@ -8,6 +8,6 @@ namespace DrillHub.Model.Categories
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IList<SubCategory> SubCategories { get; set; }
+        public virtual IList<SubCategory> SubCategories { get; set; }
     }
 }
