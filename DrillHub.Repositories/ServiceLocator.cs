@@ -1,5 +1,4 @@
 ﻿using DrillHub.Infrastructure;
-using DrillHub.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DrillHub.Repositories

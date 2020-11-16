@@ -1,15 +1,14 @@
-﻿using DrillHub.DataAccess;
-using DrillHub.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using DrillHub.Repositories;
+using DrillHub.DataAccess;
+using DrillHub.Infrastructure;
 using DrillHub.Repositories.Extensions;
+using Microsoft.EntityFrameworkCore;
 
-namespace DrillHub.Repository
+namespace DrillHub.Repositories
 {
-    public class Repository<TEntity, TKey> : EntityRepository<TEntity>, IRepository<TEntity, TKey> where TEntity : class, IAggregateRoot<TKey> where TKey : struct
+    public class Repository<TEntity, TKey> : EntityRepository<TEntity>, IRepository<TEntity, TKey>
+        where TEntity : class, IAggregateRoot<TKey> where TKey : struct
     {
         public Repository(DrillHubContext context) : base(context) { }
 

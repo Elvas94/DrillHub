@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DrillHub.Model.Products;
+using DrillHub.Model.Products.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DrillHub.WebApi.Controllers.Api

@@ -1,5 +1,4 @@
-﻿using DrillHub.Model.Orders;
-using DrillHub.Infrastructure;
+﻿using DrillHub.Infrastructure;
 
 namespace DrillHub.Model.Orders
 {
