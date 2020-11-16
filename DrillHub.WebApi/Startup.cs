@@ -1,4 +1,5 @@
-﻿using DrillHub.WebApi.Infrastructure.Extensions;
+﻿using System;
+using DrillHub.WebApi.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -51,12 +52,9 @@ namespace DrillHub.WebApi
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-            });
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    "defaultApi",
+                    "api/{controller}/{action}/{id?}");
             });
         }
     }
