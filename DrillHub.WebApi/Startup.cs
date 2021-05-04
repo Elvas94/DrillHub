@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using DrillHub.WebApi.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,12 +33,20 @@ namespace DrillHub.WebApi
             }));
 
             services.AddControllers();
-            services.AddRouting(options => options.LowercaseUrls = true);
+            //services.AddRouting(options => options.LowercaseUrls = true);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             Repositories.ServiceLocator.RegisterServices(services);
             Model.ServiceLocator.RegisterServices(services);
 
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                ////Set the comments path for the swagger json and ui.
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+            });
             services.AddDbContext<DataAccess.DrillHubContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -57,6 +67,11 @@ namespace DrillHub.WebApi
 
             app.UseHttpsRedirection();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
             app.UseRouting();
 
             app.UseAuthorization();
