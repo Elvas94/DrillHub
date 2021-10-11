@@ -9,7 +9,8 @@ namespace DrillHub.Model
             services.AddTransient<Products.ProductService>();
             services.AddTransient<Orders.OrderService>();
             services.AddTransient<ExcelService>();
-            services.AddTransient<Categories.CategoryService> ();
+            services.AddTransient<Categories.CategoryService>();
+            services.AddTransient<SubCategories.SubCategoryService>();
         }
     }
 }
