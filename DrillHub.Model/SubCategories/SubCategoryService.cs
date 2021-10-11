@@ -1,32 +1,65 @@
 ﻿using DrillHub.Infrastructure;
+using DrillHub.Model.Categories;
 using DrillHub.Model.SubCategories.Dtos;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DrillHub.Model.SubCategories
 {
     public class SubCategoryService
     {
         private readonly IRepository<SubCategory, int> _subCategoryRepository;
+        private readonly IRepository<Category, int> _categoryRepository;
 
-        public SubCategoryService(IRepository<SubCategory, int>  subCategoryRepository)
+        public SubCategoryService(
+            IRepository<SubCategory, int> subCategoryRepository,
+            IRepository<Category, int> categoryRepository)
         {
             _subCategoryRepository = subCategoryRepository;
+            _categoryRepository = categoryRepository;
+        }
+
+        public List<SubCategoryDto> GetSubCategoryDtos()
+        {
+            return (from subCategory in _subCategoryRepository.Query()
+                    from category in _categoryRepository.Query()
+                    where category.Id == subCategory.CategoryId
+                    select new SubCategoryDto
+                    {
+                        CategoryId = category.Id,
+                        Id = category.Id,
+                        CategoryName = category.Name,
+                        IsCategory = subCategory.IsCategory,
+                        Name = subCategory.Name
+                    }).ToList();
         }
 
         public SubCategoryDto GetSubCategoryDtoById(int id)
         {
-            var subCategoryDb = _subCategoryRepository.FirstOrDefault(item => item.Id == id);
-            return subCategoryDb != null
-                ? new SubCategoryDto()
-                {
-                    Id = subCategoryDb.Id,
-                    Name = subCategoryDb.Name,
-                    CategoryId = subCategoryDb.CategoryId,
-                    IsCategory = subCategoryDb.IsCategory
-                }
-                : null;
+            return (from subCategory in _subCategoryRepository.Query()
+                    from category in _categoryRepository.Query()
+                    where category.Id == subCategory.CategoryId
+                    select new SubCategoryDto
+                    {
+                        CategoryId = category.Id,
+                        Id = category.Id,
+                        CategoryName = category.Name,
+                        IsCategory = subCategory.IsCategory,
+                        Name = subCategory.Name
+                    }).FirstOrDefault(item => item.Id == id);
         }
 
-        public SubCategory SaveSubCategory(SubCategoryOnSavingDto dto)
+        public List<SelectItem> GetSubCategoriesForSelect()
+        {
+            return _subCategoryRepository.Query()
+                    .Select(item => new SelectItem
+                    {
+                        Id = item.Id,
+                        Name = item.Name
+                    }).ToList();
+        }
+
+        public SubCategoryDto InsertOrUpdateSubCategory(SubCategoryDto dto)
         {
             var subCategory = new SubCategory
             {
@@ -39,7 +72,9 @@ namespace DrillHub.Model.SubCategories
             _subCategoryRepository.InsertOrUpdate(subCategory);
             _subCategoryRepository.SaveChanges();
 
-            return subCategory;
+            dto.Id = subCategory.Id;
+
+            return dto;
         }
 
         public void DeleteSubCategoryById(int id)

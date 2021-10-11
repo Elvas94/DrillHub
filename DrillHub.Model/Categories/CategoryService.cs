@@ -21,6 +21,16 @@ namespace DrillHub.Model.Categories
                 .Include(item => item.SubCategories).ToList();
         }
 
+        public List<CategoryDto> GetCategoryDtos()
+        {
+            return _categoryRepository.Query()
+                    .Select(item => new CategoryDto
+                    {
+                        Id = item.Id,
+                        Name = item.Name
+                    }).ToList();
+        }
+
         public CategoryDto GetCategoryById(int id)
         {
             var categoryDb = _categoryRepository.FirstOrDefault(item => item.Id == id);
@@ -33,7 +43,17 @@ namespace DrillHub.Model.Categories
                 : null;
         }
 
-        public Category SaveCategory(CategoryOnSavingDto dto)
+        public List<SelectItem> GetCategoriesForSelect()
+        {
+            return _categoryRepository.Query()
+                    .Select(item => new SelectItem
+                    {
+                        Id = item.Id,
+                        Name = item.Name
+                    }).ToList();
+        }
+
+        public CategoryDto InsertOrUpdateCategory(CategoryDto dto)
         {
             var category = new Category
             {
@@ -44,7 +64,9 @@ namespace DrillHub.Model.Categories
             _categoryRepository.InsertOrUpdate(category);
             _categoryRepository.SaveChanges();
 
-            return category;
+            dto.Id = category.Id;
+
+            return dto;
         }
 
         public void DeleteCategoryById(int id)
