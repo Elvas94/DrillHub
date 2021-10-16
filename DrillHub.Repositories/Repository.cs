@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using DrillHub.DataAccess;
 using DrillHub.Infrastructure;
 using DrillHub.Repositories.Extensions;
@@ -12,11 +13,11 @@ namespace DrillHub.Repositories
     {
         public Repository(DrillHubContext context) : base(context) { }
 
-        public virtual TEntity GetByKey(
+        public virtual ValueTask<TEntity> GetByKeyAsync(
             TKey id,
             params Expression<Func<TEntity, object>>[] includedPaths)
         {
-            return Context.Set<TEntity>().IncludeByPath(includedPaths).Find(id);
+            return Context.Set<TEntity>().IncludeByPath(includedPaths).FindAsync(id);
         }
 
         public virtual void InsertOrUpdate(TEntity item)

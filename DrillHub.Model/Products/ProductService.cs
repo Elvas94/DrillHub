@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DrillHub.Infrastructure;
 using DrillHub.Model.Categories;
 using DrillHub.Model.Products.Dtos;
 using DrillHub.Model.SubCategories;
+using Microsoft.EntityFrameworkCore;
 
 namespace DrillHub.Model.Products
 {
@@ -23,22 +25,22 @@ namespace DrillHub.Model.Products
             _categoryRepository = categoryRepository;
         }
 
-        public List<ProductDto> GetProductsBySubCategoryId(int subCategoryId)
+        public Task<List<ProductDto>> GetProductsBySubCategoryIdAsync(int subCategoryId)
         {
-            return GetProductDtos().Where(product => product.SubCategoryId == subCategoryId).ToList();
+            return GetProductDtos().Where(product => product.SubCategoryId == subCategoryId).ToListAsync();
         }
 
-        public ProductDto GetProductDtoById(int id)
+        public Task<ProductDto> GetProductDtoByIdAsync(int id)
         {
-            return GetProductDtos().FirstOrDefault(item => item.Id == id);
+            return GetProductDtos().FirstOrDefaultAsync(item => item.Id == id);
         }
 
-        public List<ProductDto> GetProductDtosByIds(List<int> ids)
+        public Task<List<ProductDto>> GetProductDtosByIdsAsync(List<int> ids)
         {
-            return GetProductDtos().Where(item => ids.Contains(item.Id)).ToList();
+            return GetProductDtos().Where(item => ids.Contains(item.Id)).ToListAsync();
         }
 
-        public ProductDto InsertOrUpdate(ProductDto dto)
+        public async Task<ProductDto> InsertOrUpdateAsync(ProductDto dto)
         {
             var product = new Product
             {
@@ -54,17 +56,17 @@ namespace DrillHub.Model.Products
             };
 
             _productRepository.InsertOrUpdate(product);
-            _productRepository.SaveChanges();
+            await _productRepository.SaveChangesAsync();
 
             dto.Id = product.Id;
 
             return dto;
         }
 
-        public void DeleteProductById(int id)
+        public async Task DeleteProductByIdAsync(int id)
         {
             _productRepository.DeleteByKey(id);
-            _productRepository.SaveChanges();
+            await _productRepository.SaveChangesAsync();
         }
 
         private IQueryable<ProductDto> GetProductDtos()

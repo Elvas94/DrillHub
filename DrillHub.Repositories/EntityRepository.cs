@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using DrillHub.DataAccess;
 using DrillHub.Infrastructure;
 using DrillHub.Repositories.Extensions;
@@ -18,9 +19,9 @@ namespace DrillHub.Repositories
         {
             Context = context;
         }
-        public virtual TEntity GetByKey(params object[] keyValues)
+        public virtual ValueTask<TEntity> GetByKey(params object[] keyValues)
         {
-            return Context.Set<TEntity>().Find(keyValues);
+            return Context.Set<TEntity>().FindAsync(keyValues);
         }
 
         public virtual IQueryable<TEntity> Query()
@@ -34,16 +35,16 @@ namespace DrillHub.Repositories
             return Context.Set<TEntity>().IncludeByPath(includedPaths);
         }
 
-        public virtual TEntity FirstOrDefault(Expression<Func<TEntity, bool>> condition)
+        public virtual Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> condition)
         {
-            return Context.Set<TEntity>().FirstOrDefault(condition);
+            return Context.Set<TEntity>().FirstOrDefaultAsync(condition);
         }
 
-        public virtual TEntity FirstOrDefault(
+        public virtual Task<TEntity> FirstOrDefaultAsync(
             Expression<Func<TEntity, bool>> condition,
             params Expression<Func<TEntity, object>>[] includedPaths)
         {
-            return Context.Set<TEntity>().IncludeByPath(includedPaths).FirstOrDefault(condition);
+            return Context.Set<TEntity>().IncludeByPath(includedPaths).FirstOrDefaultAsync(condition);
         }
 
         public virtual IQueryable<TEntity> Search(Expression<Func<TEntity, bool>> condition)
@@ -58,9 +59,9 @@ namespace DrillHub.Repositories
             return Context.Set<TEntity>().IncludeByPath(includedPaths).Where(condition);
         }
 
-        public virtual int Count(Expression<Func<TEntity, bool>> condition)
+        public virtual Task<int> Count(Expression<Func<TEntity, bool>> condition)
         {
-            return Context.Set<TEntity>().Count(condition);
+            return Context.Set<TEntity>().CountAsync(condition);
         }
 
         public virtual void Insert(TEntity entity)
@@ -83,9 +84,9 @@ namespace DrillHub.Repositories
             Context.Set<TEntity>().Remove(entity);
         }
 
-        public virtual void DeleteByKey(params object[] keyValues)
+        public async virtual void DeleteByKey(params object[] keyValues)
         {
-            var entity = GetByKey(keyValues);
+            var entity = await GetByKey(keyValues);
             if (entity != null) Delete(entity);
         }
 
@@ -94,9 +95,9 @@ namespace DrillHub.Repositories
             Context.Set<TEntity>().RemoveRange(entities);
         }
 
-        public virtual int SaveChanges()
+        public virtual Task<int> SaveChangesAsync()
         {
-            return Context.SaveChanges();
+            return Context.SaveChangesAsync();
         }
 
         public virtual void Transaction(Action action)

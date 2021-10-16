@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DrillHub.Model;
 using DrillHub.Model.Categories;
 using DrillHub.Model.Categories.Dtos;
@@ -20,17 +21,17 @@ namespace DrillHub.WebApi.Controllers.Api
         }
 
         /// <summary>
-        /// Получить все категории
+        /// Получить все категории с подкатегориями
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <returns>Список категории</returns>
+        /// <returns>Категории с вложенными подкатегориями</returns>
+        [HttpGet]
         [Route("GetCategoriesWithSubCategories")]
         [ProducesResponseType(typeof(List<Category>), StatusCodes.Status200OK)]
-        [HttpGet]
-        public List<Category> GetCategoriesWithSubCategories()
+        public async Task<List<Category>> GetCategoriesWithSubCategoriesAsync()
         {
-            return _categoryService.GetCategoriesWithSubCategories();
+            return await _categoryService.GetCategoriesWithSubCategoriesAsync();
         }
 
         /// <summary>
@@ -39,27 +40,26 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <remarks>
         /// </remarks>
         /// <returns>Список категорий</returns>
-        [ProducesResponseType(typeof(List<SelectItem>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         [Route("GetCategoriesForSelect")]
-        public IActionResult GetCategoriesForSelect()
+        [ProducesResponseType(typeof(List<SelectItem>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<List<SelectItem>> GetCategoriesForSelectAsync()
         {
-            var result = _categoryService.GetCategoriesForSelect();
-            return Ok(result);
+            return await _categoryService.GetCategoriesForSelectAsync();
         }
 
         /// <summary>
-        /// Получить все категории с подкатегориями
+        /// Получить все категории
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <returns>Категории с вложенными подкатегориями</returns>
-        [ProducesResponseType(typeof(List<Category>), StatusCodes.Status200OK)]
+        /// <returns>Список категории</returns>
         [HttpGet]
-        public IActionResult GetCategories()
+        [ProducesResponseType(typeof(List<Category>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetCategoriesAsync()
         {
-            return Ok(_categoryService.GetCategoryDtos());
+            return Ok(await _categoryService.GetCategoryDtosAsync());
         }
 
         /// <summary>
@@ -68,13 +68,13 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <remarks>
         /// </remarks>
         /// <returns>Категория</returns>
+        [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(typeof(CategoryDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet]
-        public IActionResult GetCategoryById(int id)
+        public async Task<IActionResult> GetCategoryByIdAsync(int id)
         {
-            var category = _categoryService.GetCategoryById(id);
+            var category = await _categoryService.GetCategoryByIdAsync(id);
 
             if (category == null)
             {
@@ -91,11 +91,11 @@ namespace DrillHub.WebApi.Controllers.Api
         /// </remarks>
         /// <returns></returns>
         [Route("{id}")]
-        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [HttpDelete]
-        public IActionResult DeleteCategoryById(int id)
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteCategoryByIdAsync(int id)
         {
-            _categoryService.DeleteCategoryById(id);
+            await _categoryService.DeleteCategoryByIdAsync(id);
             return Ok();
         }
 
@@ -105,12 +105,11 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <remarks>
         /// </remarks>
         /// <returns>Категория с созданным Id, если его не было</returns>
-        [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
         [HttpPost]
-        public IActionResult InsertOrUpdateCategory(CategoryDto dto)
+        [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
+        public async Task<CategoryDto> InsertOrUpdateCategoryAsync(CategoryDto dto)
         {
-            var category = _categoryService.InsertOrUpdateCategory(dto);
-            return Ok(category);
+            return await _categoryService.InsertOrUpdateCategoryAsync(dto);
         }
     }
 }

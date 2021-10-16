@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DrillHub.Model.Products;
 using DrillHub.Model.Products.Dtos;
 using Microsoft.AspNetCore.Http;
@@ -25,12 +26,12 @@ namespace DrillHub.WebApi.Controllers.Api
         /// </remarks>
         /// <param name="id">Id подкатегории</param>
         /// <returns>Продукты в подкатегории</returns>
-        [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
         [HttpGet]
         [Route("GetProductsBySubCategoryId/{id}")]
-        public List<ProductDto> GetProductsBySubCategoryId([FromRoute] int id)
+        [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
+        public async Task<List<ProductDto>> GetProductsBySubCategoryIdAsync([FromRoute] int id)
         {
-            return _productService.GetProductsBySubCategoryId(id);
+            return await _productService.GetProductsBySubCategoryIdAsync(id);
         }
 
         /// <summary>
@@ -40,13 +41,13 @@ namespace DrillHub.WebApi.Controllers.Api
         /// </remarks>
         /// <param name="id">Id продукта</param>
         /// <returns>Продукт</returns>
-        [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetProductById([FromRoute] int id)
+        [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetProductByIdAsync([FromRoute] int id)
         {
-            var product = _productService.GetProductDtoById(id);
+            var product = await _productService.GetProductDtoByIdAsync(id);
             if (product == null)
             {
                 return NotFound();
@@ -61,14 +62,12 @@ namespace DrillHub.WebApi.Controllers.Api
         /// </remarks>
         /// <param name="ids">Ids продукта</param>
         /// <returns>Продукты</returns>
+        [HttpGet]
         [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet]
-        public IActionResult GetProductsByIds([FromQuery] List<int> ids)
+        public async Task<List<ProductDto>> GetProductsByIdsAsync([FromQuery] List<int> ids)
         {
-            var products = _productService.GetProductDtosByIds(ids);
-
-            return Ok(products);
+            return await _productService.GetProductDtosByIdsAsync(ids);
         }
 
         /// <summary>
@@ -78,13 +77,13 @@ namespace DrillHub.WebApi.Controllers.Api
         /// </remarks>
         /// <param name="id">Id продукта</param>
         /// <returns></returns>
+        [HttpDelete]
         [Route("{id}")]
         [ProducesResponseType(typeof(IActionResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete]
-        public IActionResult DeleteProductById(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]    
+        public async Task<IActionResult> DeleteProductByIdAsync(int id)
         {
-            _productService.DeleteProductById(id);
+            await _productService.DeleteProductByIdAsync(id);
             return Ok();
         }
 
@@ -94,14 +93,12 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <remarks>
         /// </remarks>
         /// <returns>Продукт с созданным Id, если его не было</returns>
-        [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
         [HttpPost]
-        public IActionResult InsertOrUpdate(ProductDto dto)
+        [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
+        
+        public async Task<ProductDto> InsertOrUpdateAsync(ProductDto dto)
         {
-            var result = _productService.InsertOrUpdate(dto);
-            return Ok(result);
+            return await _productService.InsertOrUpdateAsync(dto);
         }
-
-
     }
 }

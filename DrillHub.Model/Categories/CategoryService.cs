@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DrillHub.Infrastructure;
 using DrillHub.Model.Categories.Dtos;
 using Microsoft.EntityFrameworkCore;
@@ -15,25 +16,25 @@ namespace DrillHub.Model.Categories
             _categoryRepository = categoryRepository;
         }
 
-        public List<Category> GetCategoriesWithSubCategories()
+        public Task<List<Category>> GetCategoriesWithSubCategoriesAsync()
         {
             return _categoryRepository.Query()
-                .Include(item => item.SubCategories).ToList();
+                .Include(item => item.SubCategories).ToListAsync();
         }
 
-        public List<CategoryDto> GetCategoryDtos()
+        public Task<List<CategoryDto>> GetCategoryDtosAsync()
         {
             return _categoryRepository.Query()
                     .Select(item => new CategoryDto
                     {
                         Id = item.Id,
                         Name = item.Name
-                    }).ToList();
+                    }).ToListAsync();
         }
 
-        public CategoryDto GetCategoryById(int id)
+        public async Task<CategoryDto> GetCategoryByIdAsync(int id)
         {
-            var categoryDb = _categoryRepository.FirstOrDefault(item => item.Id == id);
+            var categoryDb = await _categoryRepository.FirstOrDefaultAsync(item => item.Id == id);
             return categoryDb != null
                 ? new CategoryDto
                 {
@@ -43,17 +44,17 @@ namespace DrillHub.Model.Categories
                 : null;
         }
 
-        public List<SelectItem> GetCategoriesForSelect()
+        public Task<List<SelectItem>> GetCategoriesForSelectAsync()
         {
             return _categoryRepository.Query()
                     .Select(item => new SelectItem
                     {
                         Id = item.Id,
                         Name = item.Name
-                    }).ToList();
+                    }).ToListAsync();
         }
 
-        public CategoryDto InsertOrUpdateCategory(CategoryDto dto)
+        public async Task<CategoryDto> InsertOrUpdateCategoryAsync(CategoryDto dto)
         {
             var category = new Category
             {
@@ -62,17 +63,17 @@ namespace DrillHub.Model.Categories
             };
 
             _categoryRepository.InsertOrUpdate(category);
-            _categoryRepository.SaveChanges();
+            await _categoryRepository.SaveChangesAsync();
 
             dto.Id = category.Id;
 
             return dto;
         }
 
-        public void DeleteCategoryById(int id)
+        public async Task DeleteCategoryByIdAsync(int id)
         {
             _categoryRepository.DeleteByKey(id);
-            _categoryRepository.SaveChanges();
+            await _categoryRepository.SaveChangesAsync();
         }
     }
 }

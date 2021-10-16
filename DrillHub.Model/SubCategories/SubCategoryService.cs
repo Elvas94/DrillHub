@@ -1,8 +1,10 @@
 ﻿using DrillHub.Infrastructure;
 using DrillHub.Model.Categories;
 using DrillHub.Model.SubCategories.Dtos;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DrillHub.Model.SubCategories
 {
@@ -19,7 +21,7 @@ namespace DrillHub.Model.SubCategories
             _categoryRepository = categoryRepository;
         }
 
-        public List<SubCategoryDto> GetSubCategoryDtos()
+        public Task<List<SubCategoryDto>> GetSubCategoryDtosAsync()
         {
             return (from subCategory in _subCategoryRepository.Query()
                     from category in _categoryRepository.Query()
@@ -31,10 +33,10 @@ namespace DrillHub.Model.SubCategories
                         CategoryName = category.Name,
                         IsCategory = subCategory.IsCategory,
                         Name = subCategory.Name
-                    }).ToList();
+                    }).ToListAsync();
         }
 
-        public SubCategoryDto GetSubCategoryDtoById(int id)
+        public Task<SubCategoryDto> GetSubCategoryDtoByIdAsync(int id)
         {
             return (from subCategory in _subCategoryRepository.Query()
                     from category in _categoryRepository.Query()
@@ -46,20 +48,20 @@ namespace DrillHub.Model.SubCategories
                         CategoryName = category.Name,
                         IsCategory = subCategory.IsCategory,
                         Name = subCategory.Name
-                    }).FirstOrDefault(item => item.Id == id);
+                    }).FirstOrDefaultAsync(item => item.Id == id);
         }
 
-        public List<SelectItem> GetSubCategoriesForSelect()
+        public Task<List<SelectItem>> GetSubCategoriesForSelectAsync()
         {
             return _subCategoryRepository.Query()
                     .Select(item => new SelectItem
                     {
                         Id = item.Id,
                         Name = item.Name
-                    }).ToList();
+                    }).ToListAsync();
         }
 
-        public SubCategoryDto InsertOrUpdateSubCategory(SubCategoryDto dto)
+        public async Task<SubCategoryDto> InsertOrUpdateSubCategoryAsync(SubCategoryDto dto)
         {
             var subCategory = new SubCategory
             {
@@ -70,17 +72,17 @@ namespace DrillHub.Model.SubCategories
             };
 
             _subCategoryRepository.InsertOrUpdate(subCategory);
-            _subCategoryRepository.SaveChanges();
+            await _subCategoryRepository.SaveChangesAsync();
 
             dto.Id = subCategory.Id;
 
             return dto;
         }
 
-        public void DeleteSubCategoryById(int id)
+        public async Task DeleteSubCategoryByIdAsync(int id)
         {
             _subCategoryRepository.DeleteByKey(id);
-            _subCategoryRepository.SaveChanges();
+            await _subCategoryRepository.SaveChangesAsync();
         }
     }
 }

@@ -5,6 +5,7 @@ using DrillHub.Model.SubCategories.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,11 +29,11 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <remarks>
         /// </remarks>
         /// <returns>Подкатегории</returns>
-        [ProducesResponseType(typeof(List<SubCategoryDto>), StatusCodes.Status200OK)]
         [HttpGet]
-        public IActionResult GetSubCategories()
+        [ProducesResponseType(typeof(List<SubCategoryDto>), StatusCodes.Status200OK)]
+        public async Task<List<SubCategoryDto>> GetSubCategoriesAsync()
         {
-            return Ok(_subCategoryService.GetSubCategoryDtos());
+            return await _subCategoryService.GetSubCategoryDtosAsync();
         }
 
         /// <summary>
@@ -41,13 +42,13 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <remarks>
         /// </remarks>
         /// <returns>Подкатегория</returns>
-        [ProducesResponseType(typeof(SubCategoryDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetCategoryById(int id)
+        [ProducesResponseType(typeof(SubCategoryDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetCategoryByIdAsync(int id)
         {
-            var category = _subCategoryService.GetSubCategoryDtoById(id);
+            var category = await _subCategoryService.GetSubCategoryDtoByIdAsync(id);
 
             if (category == null)
             {
@@ -63,14 +64,13 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <remarks>
         /// </remarks>
         /// <returns>Список подкатегорий</returns>
-        [ProducesResponseType(typeof(List<SelectItem>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         [Route("GetSubCategoriesForSelect")]
-        public IActionResult GetCategoriesForSelect()
+        [ProducesResponseType(typeof(List<SelectItem>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<List<SelectItem>> GetSubCategoriesForSelectAsync()
         {
-            var result = _subCategoryService.GetSubCategoriesForSelect();
-            return Ok(result);
+            return await _subCategoryService.GetSubCategoriesForSelectAsync();
         }
 
         /// <summary>
@@ -79,13 +79,13 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <remarks>
         /// </remarks>
         /// <returns></returns>
+        [HttpDelete]
         [Route("{id}")]
         [ProducesResponseType(typeof(IActionResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete]
-        public IActionResult DeleteCategoryById(int id)
+        public async Task<IActionResult> DeleteCategoryByIdAsync(int id)
         {
-            _subCategoryService.DeleteSubCategoryById(id);
+            await _subCategoryService.DeleteSubCategoryByIdAsync(id);
             return Ok();
         }
 
@@ -95,12 +95,12 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <remarks>
         /// </remarks>
         /// <returns>Подкатегория с созданным Id, если его не было</returns>
-        [ProducesResponseType(typeof(SubCategoryDto), StatusCodes.Status200OK)]
         [HttpPost]
-        public IActionResult InsertOrUpdateCategory(SubCategoryDto dto)
+        [ProducesResponseType(typeof(SubCategoryDto), StatusCodes.Status200OK)]
+        public async Task<SubCategoryDto> InsertOrUpdateCategoryAsync(SubCategoryDto dto)
         {
-            _subCategoryService.InsertOrUpdateSubCategory(dto);
-            return Ok(dto);
+            await _subCategoryService.InsertOrUpdateSubCategoryAsync(dto);
+            return dto;
         }
     }
 }

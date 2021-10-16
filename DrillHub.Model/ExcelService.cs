@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using DrillHub.ConsoleRunner;
 using DrillHub.Infrastructure;
 using DrillHub.Model.Categories;
@@ -27,10 +28,10 @@ namespace DrillHub.Model
             _productRepository = productRepository;
         }
 
-        public void InsertCategoriesWithSubCategoriesWithProduct(List<Category> categories)
+        public async Task InsertCategoriesWithSubCategoriesWithProductAsync(List<Category> categories)
         {
             _categoryRepository.InsertRange(categories);
-            _categoryRepository.SaveChanges();
+            await _categoryRepository.SaveChangesAsync();
         }
 
         public void InsertOrUpdateCategoriesWithSubCategoriesWithProduct(List<Category> categories)
@@ -87,10 +88,10 @@ namespace DrillHub.Model
             //_categoryRepository.SaveChanges();
         }
 
-        public void UpdateDataBaseFromStream(FileStream stream, string categoryNamePrefix)
+        public async Task UpdateDataBaseFromStream(FileStream stream, string categoryNamePrefix)
         {
             var categories = ParseExcel(stream, categoryNamePrefix);
-            InsertCategoriesWithSubCategoriesWithProduct(categories);
+            await InsertCategoriesWithSubCategoriesWithProductAsync(categories);
         }
 
         public List<Category> ParseExcel(FileStream stream, string categoryNamePrefix)
