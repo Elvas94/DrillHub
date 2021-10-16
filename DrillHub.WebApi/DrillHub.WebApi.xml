@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DrillHub.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:DrillHub.WebApi.Controllers.Api.CategoriesController.GetCategoriesWithSubCategoriesAsync">
+            <summary>
+            Получить все категории с подкатегориями
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Категории с вложенными подкатегориями</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.CategoriesController.GetCategoriesForSelectAsync">
+            <summary>
+            Получить категории для выпадающего списка
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Список категорий</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.CategoriesController.GetCategoriesAsync">
+            <summary>
+            Получить все категории
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Список категории</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.CategoriesController.GetCategoryByIdAsync(System.Int32)">
+            <summary>
+            Получить категорию по Id
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Категория</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.CategoriesController.DeleteCategoryByIdAsync(System.Int32)">
+            <summary>
+            Удалить категорию
+            </summary>
+            <remarks>
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.CategoriesController.InsertOrUpdateCategoryAsync(DrillHub.Model.Categories.Dtos.CategoryDto)">
+            <summary>
+            Создать категорию, если ее нет, обновить категорию, если она уже была
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Категория с созданным Id, если его не было</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.ProductsController.GetProductsBySubCategoryIdAsync(System.Int32)">
+            <summary>
+            Получить все продукты в подкатегории по eё id
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="id">Id подкатегории</param>
+            <returns>Продукты в подкатегории</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.ProductsController.GetProductByIdAsync(System.Int32)">
+            <summary>
+            Получить продукт по id
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="id">Id продукта</param>
+            <returns>Продукт</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.ProductsController.GetProductsByIdsAsync(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Получить продукты по списку ids
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="ids">Ids продукта</param>
+            <returns>Продукты</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.ProductsController.DeleteProductByIdAsync(System.Int32)">
+            <summary>
+            Удалить продукт по Id
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="id">Id продукта</param>
+            <returns></returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.ProductsController.InsertOrUpdateAsync(DrillHub.Model.Products.Dtos.ProductDto)">
+            <summary>
+            Создать продукт, если его нет, обновить продукт, если он уже был создан
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Продукт с созданным Id, если его не было</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.SubCategoriesController.GetSubCategoriesAsync">
+            <summary>
+            Получить все подкатегории
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Подкатегории</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.SubCategoriesController.GetCategoryByIdAsync(System.Int32)">
+            <summary>
+            Получить подкатегорию по Id
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Подкатегория</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.SubCategoriesController.GetSubCategoriesForSelectAsync">
+            <summary>
+            Получить подкатегории для выпадающего списка
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Список подкатегорий</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.SubCategoriesController.DeleteCategoryByIdAsync(System.Int32)">
+            <summary>
+            Удалить подкатегорию
+            </summary>
+            <remarks>
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.SubCategoriesController.InsertOrUpdateCategoryAsync(DrillHub.Model.SubCategories.Dtos.SubCategoryDto)">
+            <summary>
+            Создать подкатегорию, если ее нет, обновить категорию, если она уже была
+            </summary>
+            <remarks>
+            </remarks>
+            <returns>Подкатегория с созданным Id, если его не было</returns>
+        </member>
+    </members>
+</doc>
