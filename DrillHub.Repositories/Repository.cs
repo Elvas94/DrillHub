@@ -20,16 +20,15 @@ namespace DrillHub.Repositories
             return Context.Set<TEntity>().IncludeByPath(includedPaths).FindAsync(id);
         }
 
-        public virtual void InsertOrUpdate(TEntity item)
+        public virtual void InsertOrUpdate(TEntity entity)
         {
-            var dbItem = base.GetByKey(item.Id);
-            if (dbItem == null)
+            if (entity.Id.Equals(0))
             {
-                Context.Set<TEntity>().Add(item);
+                Context.Set<TEntity>().Add(entity);
             }
             else
             {
-                Context.Entry(item).State = EntityState.Modified;
+                Context.Entry(entity).State = EntityState.Modified;
             }
         }
     }
