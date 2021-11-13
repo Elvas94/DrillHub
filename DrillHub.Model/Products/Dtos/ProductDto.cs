@@ -1,4 +1,7 @@
-﻿namespace DrillHub.Model.Products.Dtos
+﻿using DrillHub.Model.ProductImages;
+using System.Collections.Generic;
+
+namespace DrillHub.Model.Products.Dtos
 {
     public class ProductDto
     {
@@ -14,5 +17,6 @@
         public string VendorCode { get; set; }
         public UnitType UnitType { get; set; }
         public OrderStatus OrderStatus { get; set; }
+        public IList<ProductImage> ProductImages { get; set; }
     }
 }

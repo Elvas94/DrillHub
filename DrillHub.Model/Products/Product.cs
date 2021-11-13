@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DrillHub.Infrastructure;
+using DrillHub.Model.ProductImages;
 
 namespace DrillHub.Model.Products
 {
@@ -16,5 +17,6 @@ namespace DrillHub.Model.Products
         public OrderStatus OrderStatus { get; set; }
         public UnitType UnitType { get; set; }
         public virtual IList<ProductOrder> Orders { get; set; }
+        public virtual IList<ProductImage> ProductImages { get; set; } 
     }
 }

@@ -9,6 +9,7 @@ namespace DrillHub.DataAccess
         public DbSet<Model.Products.ProductOrder> ProductOrders { get; set; }
         public DbSet<Model.Categories.Category> Categories { get; set; }
         public DbSet<Model.SubCategories.SubCategory> SubCategories { get; set; }
+        public DbSet<Model.ProductImages.ProductImage> ProductImages { get; set; }
 
         public DrillHubContext(DbContextOptions options) : base(options) { }
 
