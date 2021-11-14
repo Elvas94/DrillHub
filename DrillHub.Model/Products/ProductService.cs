@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using DrillHub.Infrastructure;
 using DrillHub.Model.Categories;
-using DrillHub.Model.ProductImages;
 using DrillHub.Model.Products.Dtos;
 using DrillHub.Model.SubCategories;
 using Microsoft.EntityFrameworkCore;
@@ -13,19 +12,15 @@ namespace DrillHub.Model.Products
     public class ProductService
     {
         private readonly IRepository<Product, int> _productRepository;
-        private readonly IRepository<ProductImage, int> _imageRepository;
         private readonly IRepository<SubCategory, int> _subCategoryRepository;
         private readonly IRepository<Category, int> _categoryRepository;
 
-
         public ProductService(
             IRepository<Product, int> productRepository,
-            IRepository<ProductImage, int> imageRepository,
             IRepository<SubCategory, int> subCategoryRepository,
             IRepository<Category, int> categoryRepository)
         {
             _productRepository = productRepository;
-            _imageRepository = imageRepository;
             _subCategoryRepository = subCategoryRepository;
             _categoryRepository = categoryRepository;
         }
@@ -35,11 +30,9 @@ namespace DrillHub.Model.Products
             return GetProductDtos().Where(product => product.SubCategoryId == subCategoryId).ToListAsync();
         }
 
-        public async Task<ProductDto> GetProductDtoByIdAsync(int id)
+        public Task<ProductDto> GetProductDtoByIdAsync(int id)
         {
-            var product = await GetProductDtos().FirstOrDefaultAsync(item => item.Id == id);
-            product.ProductImages = await _imageRepository.Search(item => item.ProductId == product.Id).AsNoTracking().ToListAsync();
-            return product;
+            return GetProductDtos().FirstOrDefaultAsync(item => item.Id == id);
         }
 
         public Task<List<ProductDto>> GetProductDtosByIdsAsync(List<int> ids)
@@ -66,22 +59,6 @@ namespace DrillHub.Model.Products
             await _productRepository.SaveChangesAsync();
 
             dto.Id = product.Id;
-
-            foreach (var image in dto.ProductImages)
-            {
-                var test = new ProductImage
-                {
-                    Content = image.Content,
-                    Extension = image.Extension,
-                    Id = image.Id,
-                    Name = image.Name,
-                    ProductId = dto.Id,
-                    Size = image.Size
-                };
-                _imageRepository.InsertOrUpdate(test);
-            }
-
-            await _productRepository.SaveChangesAsync();
 
             return dto;
         }

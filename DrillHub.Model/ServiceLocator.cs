@@ -7,6 +7,7 @@ namespace DrillHub.Model
         public static void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<Products.ProductService>();
+            services.AddTransient<ProductImages.ProductImageService>();
             services.AddTransient<Orders.OrderService>();
             services.AddTransient<ExcelService>();
             services.AddTransient<Categories.CategoryService>();

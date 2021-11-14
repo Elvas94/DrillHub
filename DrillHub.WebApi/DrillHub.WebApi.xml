@@ -52,6 +52,41 @@
             </remarks>
             <returns>Категория с созданным Id, если его не было</returns>
         </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.ProductImagesController.GetProductsBySubCategoryIdAsync(System.Int32)">
+            <summary>
+            Получить все изображения продукта по eго id
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="id">Id продукта</param>
+            <returns>Изображения продукта</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.ProductImagesController.GetProductImageByIdAsync(System.Int32)">
+            <summary>
+            Получить изображение продукта по id
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="id">Id изображения</param>
+            <returns>Изображение продукта</returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.ProductImagesController.DeleteProductImageByIdAsync(System.Int32)">
+            <summary>
+            Удалить изображение продукта по Id
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="id">Id изображения</param>
+            <returns></returns>
+        </member>
+        <member name="M:DrillHub.WebApi.Controllers.Api.ProductImagesController.InsertOrUpdateAsync(System.Collections.Generic.List{DrillHub.Model.ProductImages.ProductImageDto})">
+            <summary>
+            Добавить изображения для продукта
+            </summary>
+            <remarks>
+            </remarks>
+            <returns></returns>
+        </member>
         <member name="M:DrillHub.WebApi.Controllers.Api.ProductsController.GetProductsBySubCategoryIdAsync(System.Int32)">
             <summary>
             Получить все продукты в подкатегории по eё id
