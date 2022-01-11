@@ -79,12 +79,12 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <returns></returns>
         [HttpDelete]
         [Route("{id}")]
-        [ProducesResponseType(typeof(IActionResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]    
+        [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]   
         public async Task<IActionResult> DeleteProductByIdAsync(int id)
         {
             await _productService.DeleteProductByIdAsync(id);
-            return Ok();
+            return NoContent();
         }
 
         /// <summary>
