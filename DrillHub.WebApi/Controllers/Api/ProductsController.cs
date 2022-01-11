@@ -80,7 +80,7 @@ namespace DrillHub.WebApi.Controllers.Api
         [HttpDelete]
         [Route("{id}")]
         [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]   
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteProductByIdAsync(int id)
         {
             await _productService.DeleteProductByIdAsync(id);
@@ -94,11 +94,11 @@ namespace DrillHub.WebApi.Controllers.Api
         /// </remarks>
         /// <returns>Продукт с созданным Id, если его не было</returns>
         [HttpPost]
-        [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
-        
-        public async Task<ProductDto> InsertOrUpdateAsync(ProductDto dto)
+        [ProducesResponseType(typeof(OkObjectResult), StatusCodes.Status200OK)]
+        public async Task<OkObjectResult> InsertOrUpdateAsync(ProductDto dto)
         {
-            return await _productService.InsertOrUpdateAsync(dto);
+            await _productService.InsertOrUpdateAsync(dto);
+            return Ok(new { dto.Id });
         }
     }
 }

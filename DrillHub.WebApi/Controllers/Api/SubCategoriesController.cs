@@ -96,11 +96,11 @@ namespace DrillHub.WebApi.Controllers.Api
         /// </remarks>
         /// <returns>Подкатегория с созданным Id, если его не было</returns>
         [HttpPost]
-        [ProducesResponseType(typeof(SubCategoryDto), StatusCodes.Status200OK)]
-        public async Task<SubCategoryDto> InsertOrUpdateCategoryAsync(SubCategoryDto dto)
+        [ProducesResponseType(typeof(OkObjectResult), StatusCodes.Status200OK)]
+        public async Task<OkObjectResult> InsertOrUpdateCategoryAsync(SubCategoryDto dto)
         {
             await _subCategoryService.InsertOrUpdateSubCategoryAsync(dto);
-            return dto;
+            return Ok(new { dto.Id });
         }
     }
 }
