@@ -92,11 +92,11 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <returns></returns>
         [Route("{id}")]
         [HttpDelete]
-        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteCategoryByIdAsync(int id)
         {
             await _categoryService.DeleteCategoryByIdAsync(id);
-            return Ok();
+            return NoContent();
         }
 
         /// <summary>

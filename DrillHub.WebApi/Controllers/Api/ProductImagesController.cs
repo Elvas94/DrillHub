@@ -64,12 +64,12 @@ namespace DrillHub.WebApi.Controllers.Api
         /// <returns></returns>
         [HttpDelete]
         [Route("{id}")]
-        [ProducesResponseType(typeof(IActionResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(NoContentResult), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteProductImageByIdAsync(int id)
+        public async Task<NoContentResult> DeleteProductImageByIdAsync(int id)
         {
             await _productImageService.DeleteProductImageByIdAsync(id);
-            return Ok();
+            return NoContent();
         }
 
         /// <summary>
@@ -79,12 +79,12 @@ namespace DrillHub.WebApi.Controllers.Api
         /// </remarks>
         /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProductDto), StatusCodes.Status204NoContent)]
 
-        public async Task<OkResult> InsertOrUpdateAsync(List<ProductImageDto> images)
+        public async Task<NoContentResult> InsertOrUpdateAsync(List<ProductImageDto> images)
         {
             await _productImageService.SaveProductImagesAsync(images);
-            return Ok();
+            return NoContent();
         }
     }
 }
